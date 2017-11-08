@@ -1,0 +1,114 @@
+{% extends "share/master.html" %} 
+{% block title %}资金确认{% end %}
+
+{% block main %}
+{% set infos = { 'title' : '配置中心', 'parent' : 'Dashboard' } %}
+{% set servers = [ {'code': 'jinma', 'name': '金玛'}, 
+                   {'code': 'zhonghui', 'name':'中汇'}, 
+                   {'code': 'lianyi', 'name': '联亿'}, 
+                   {'code': 'aifu', 'name': '艾富'}, 
+                   {'code': 'xinghui', 'name': '星汇'},
+                   {'code': 'weinuo', 'name': '韦诺'},
+                   {'code': 'baoli', 'name': '宝利'},
+                   {'code': 'chaoxiang', 'name': '朝向'},
+                   {'code': 'laisi', 'name': '莱斯'},
+                   {'code': 'test', 'name': '测试服'},
+                   {'code': 'litai', 'name': '利泰'}] %}
+<div id="page-wrapper">
+    <div class="container-fluid">
+        {% include "share/navbar2.html" %}
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th>服务器</th>
+                            <th>API</th>
+                            <th>行情</th>
+                            <th>微信</th>
+                            <th>CPU%</th>
+                            <th>内存%</th>
+                            <th>磁盘%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in servers %}
+                        <tr>
+                            <td class="text-danger">{{i['name']}}</td>
+							{% set key='api_'+i['code'] %}
+							{% set conf = [ c for c in systemconfigs if c.key == key ] %}
+							{% set conf = conf and conf[0] or None %}
+                            <td><input type="text" id="{{'api_'+i['code']}}" value="{{ conf and conf.value or '' }}"  class="text-success" style="width: 80px;"></td>
+							{% set key='hq_'+i['code'] %}
+							{% set conf = [ c for c in systemconfigs if c.key == key ] %}
+							{% set conf = conf and conf[0] or None %}
+                            <td><input type="text" id="{{'hq_'+i['code']}}" value="{{ conf and conf.value or '' }}" class="text-success" style="width: 80px;"></td>
+							{% set key='wx_'+i['code'] %}
+							{% set conf = [ c for c in systemconfigs if c.key == key ] %}
+							{% set conf = conf and conf[0] or None %}
+                            <td><input type="text" id="{{'wx_'+i['code']}}" value="{{ conf and conf.value or '' }}" class="text-success" style="width: 80px;"></td>
+							{% set key='cpu_'+i['code'] %}
+							{% set conf = [ c for c in systemconfigs if c.key == key ] %}
+							{% set conf = conf and conf[0] or None %}
+                            <td><input type="text" id="{{'cpu_'+i['code']}}" value="{{ conf and conf.value or '' }}" class="text-success" style="width: 80px;"></td>
+							{% set key='men_'+i['code'] %}
+							{% set conf = [ c for c in systemconfigs if c.key == key ] %}
+							{% set conf = conf and conf[0] or None %}
+                            <td><input type="text" id="{{'men_'+i['code']}}" value="{{ conf and conf.value or '' }}" class="text-success" style="width: 80px;"></td>
+							{% set key='disk_'+i['code'] %}
+							{% set conf = [ c for c in systemconfigs if c.key == key ] %}
+							{% set conf = conf and conf[0] or None %}
+                            <td><input type="text" id="{{'disk_'+i['code']}}" value="{{ conf and conf.value or '' }}" class="text-success" style="width: 80px;"></td>
+                        </tr>
+                        {% end %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+        <!-- 第一层 -->
+        <!-- /.row -->
+        {% include "share/rightside.html" %}
+    </div>
+</div>
+{% end %}
+{% block script %}
+<script type="text/javascript">
+    $(function(){
+        $(document).ready(function() {
+            var keys= new Array();
+            var names=['jinma', 'zhonghui', 'lianyi', 'aifu', 'xinghui', 'weinuo', 'baoli', 'chaoxiang', 'laisi', 'litai', 'test'];
+            var args=['api_', 'hq_', 'wx_', 'cpu_', 'men_', 'disk_'];
+            for(i=0, len=args.length; i<len; i++)
+            {
+                for(k=0, lens=names.length; k<lens; k++)
+                {
+                    keys.push(args[i]+names[k]);
+                }
+            }
+            for (var i = 0, len = keys.length; i < len; i++)
+            {
+                (function (key){
+                    var _key = "#"+key;
+                    $(_key).on("blur", function(evt){
+                        $.get("/config/" + key + '/' + evt.target.value, function(res) {
+                            toastr.options = {
+                                closeButton: true,
+                                progressBar: true,
+                                showMethod: 'fadeIn',
+                                hideMethod: 'fadeOut',
+                                timeOut: 1000
+                            };
+
+                            if(res.status === "ok") {
+                                toastr.success(res.desc, '设置成功');
+                            } else {
+                                toastr.error(res.desc, '设置失败');
+                            }
+                        });
+                    });
+                })(keys[i]);
+            }
+		});
+	});
+</script>
+{% end %}

@@ -1,0 +1,48 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+        <div class="user-profile">
+            <div class="dropdown user-pro-body">
+                <div><img src="{{ static_url('plugins/images/users/varun.jpg') }}" alt="user-img" class="img-circle"></div> <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Steave Gection <span class="caret"></span></a>
+                <ul class="dropdown-menu animated flipInY">
+                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
+                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-power-off"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <ul class="nav" id="side-menu">
+            <li class="sidebar-search hidden-sm hidden-md hidden-lg">
+                <!-- input-group -->
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span> </div>
+                <!-- /input-group -->
+            </li>
+            <li class="nav-small-cap m-t-10">--- 主菜单</li>
+            <li> <a href="/index" class="waves-effect active"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu"> 数据中心 <span class="fa arrow"></span> <span class="label label-rouded label-custom pull-right">4</span></span></a>
+                <ul class="nav nav-second-level">
+                    <li> <a href="index.html">Minimalistic</a> </li>
+                    <li> <a href="index2.html">Demographical</a> </li>
+                    <li> <a href="index3.html">Analitical</a> </li>
+                    <li> <a href="index4.html">Simpler</a> </li>
+                </ul>
+            </li>
+            <li> <a href="forms.html" class="waves-effect"><i data-icon="&#xe00b;" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">日志中心<span class="fa arrow"></span></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="/reports/mt4">MT4</a></li>
+                </ul>
+            </li>
+            <li class="nav-small-cap">--- 系统</li>
+            <li> <a href="/system/config" class="waves-effect"><i data-icon="P" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">配置中心</span></a> </li>
+            <li><a href="login.html" class="waves-effect"><i class="icon-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+{% block global %}{% end %}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ static_url("bootstrap/dist/css/bootstrap.min.css") }}" rel="stylesheet">
+        <!-- Menu CSS -->
+        <link href="{{ static_url("plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css") }}" rel="stylesheet">
+        <!-- toast CSS -->
+        <link href="{{ static_url("plugins/bower_components/toast-master/css/jquery.toast.css") }}" rel="stylesheet">
+        <!-- morris CSS -->
+        <link href="{{ static_url("plugins/bower_components/morrisjs/morris.css") }}" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="{{ static_url("css/style.css") }}" rel="stylesheet">
+        <!-- color CSS -->
+        <link href="{{ static_url("css/colors/default-dark.css") }}" id="theme"  rel="stylesheet">
+        <!-- toastr -->
+        <link href="{{ static_url("plugins/toastr/toastr.min.css") }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ static_url("css/bootstrap-datetimepicker.css") }}" rel="stylesheet" type="text/css"/>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o)
+                    , m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-19175540-9', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <div id="wrapper">
+            <main class="page-content content-wrap">
+                {% include "navbar.html" %}
+                {% include "sidebar.html" %}
+                {% block main %}{% end %}
+            </main>
+        </div>
+
+        <!-- jQuery -->
+        <script src="{{ static_url('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ static_url('bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <!-- Menu Plugin JavaScript -->
+        <script src="{{ static_url('plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js') }}"></script>
+        <!--slimscroll JavaScript -->
+        <script src="{{ static_url('js/jquery.slimscroll.js') }}"></script>
+        <!--Wave Effects -->
+        <script src="{{ static_url('js/waves.js') }}"></script>
+        <!--Counter js -->
+        <script src="{{ static_url('plugins/bower_components/waypoints/lib/jquery.waypoints.js') }}"></script>
+        <script src="{{ static_url('plugins/bower_components/counterup/jquery.counterup.min.js') }}"></script>
+        <!--Morris JavaScript -->
+        <script src="{{ static_url('plugins/bower_components/raphael/raphael-min.js') }}"></script>
+        <script src="{{ static_url('plugins/bower_components/morrisjs/morris.js') }}"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="{{ static_url('js/custom.min.js') }}"></script>
+        <script src="{{ static_url('js/dashboard1.js') }}"></script>
+        <!-- Sparkline chart JavaScript -->
+        <script src="{{ static_url('plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+        <script src="{{ static_url('plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js') }}"></script>
+        <script src="{{ static_url('plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
+        <script src="{{ static_url("plugins/toastr/toastr.min.js") }}"></script>
+        <script src="{{ static_url("js/bootstrap-datetimepicker.js") }}"></script>
+        <script src="{{ static_url("js/bootstrap-datetimepicker.fr.js") }}"></script> 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.toast({
+                    heading: 'Welcome to Elite admin'
+                    , text: 'Use the predefined ones, or specify a custom position object.'
+                    , position: 'top-right'
+                    , loaderBg: '#ff6849'
+                    , icon: 'info'
+                    , hideAfter: 3500
+                    , stack: 6
+                })
+            });
+        </script>
+
+        {% block script %}{% end %}
+    </body>
+</html>
