@@ -26,15 +26,45 @@ MONGODB_PASSWORD = ''
 # WebServer端口
 TORNADO_PORT = 8080
 # COOKIE加密匙
-COOKIE_SECRET = "61oETzKXQAGaYdHygfD3GeJJFuYh7EQJmjuGf1o/Vo="
+COOKIE_SECRET = "61oETzKXQAGaYkljksYUHGjSQJmjuGf1o/Vo="
 # 登陆页面
 LOGIN_URL = "/account/signin"
 
+
 #
-# App设置
+# 页面设置
 #
 
 # 默认分页每页大小
 DEFAULT_PAGESIZE = 10
 
 
+#
+# 邮件配置
+#
+
+# 发送人(QQ邮箱)
+MAIL_FROM = "454045250@qq.com"
+# 密钥
+MAIL_PWD = "rfucqvfcuucecbca"
+# 接收着(列表)
+MAIL_TO = ["hongyi@sofyun.com"]
+#MAIL_TO = ["wangyangsheng@sofyun.com","hongyi@sofyun.com"]
+# 日志路径
+MAIL_LOG_PATH = "/var/log/mail/"
+# 
+# 发送等级
+#
+# 1: 严重错误
+# :
+MAIL_LEVEL = [1]
+
+
+#
+# 服务器名称
+#
+
+SERVERS = {
+    "zhonghui": "中汇",
+    "zhonghuihq": "中汇行情",
+}

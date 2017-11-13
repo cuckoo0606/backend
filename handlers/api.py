@@ -7,6 +7,7 @@
 
 
 import os
+import sys
 import json
 import datetime
 import tornado.web
@@ -15,6 +16,12 @@ from core.web import HandlerBase
 from framework.mvc.web import url
 from framework.data.mongo import db
 from framework.util.codes import error_code
+from framework.util.mail import sendEmail
+
+sys.path.append(os.path.abspath("../"))
+reload(sys)
+sys.setdefaultencoding('utf-8')
+from settings import SERVERS
 
 
 @url("/v1/systemconfig")
@@ -30,8 +37,8 @@ class SystemConfig_v1(HandlerBase):
 
     def save(self, name, type, subtype, level, content, subname):
         # 严重错误, 发送邮件或短信
-        # if type == 1:
-        #    pass
+        if level == 1:
+            sendEmail("严重错误", content)
         db.warning.save({
             "name": subname,
             "type": type,
@@ -68,6 +75,7 @@ class SystemConfig_v1(HandlerBase):
         name = self.get_argument('name', '')
         subname = self.get_argument('subname', '')
         arg = self.get_argument('arg', '')
+
         if not name or not subname or not arg:
             return self.json(error_code("NAME_NOT_NONE"))
         # 判断路径是否存在
@@ -119,7 +127,7 @@ class SystemConfig_v1(HandlerBase):
         # MONGODB状态
         elif len(args) == 1 and args[0] == "error":
             path = "{0}/{1}.log".format(dir_path, "mongo")
-            content = "数据库连接失败"
+            content = "{0}, 服务器: {1},  数据库连接失败!".format(self.func_time(datetime.datetime.now()), SERVERS[subname])
             cmd = "echo {0} >> {1}".format(content, path)
             os.system(cmd)
             self.save(name, 3, 'mongo', 1, content, subname)
